@@ -1,0 +1,17 @@
+[user]
+	email = 42499166+funmise@users.noreply.github.com
+	name = funmise
+[pull]
+	rebase = false
+[core]
+	excludesfile = ~/.gitignore_global
+	editor = vim
+[init]
+	defaultBranch = main
+[alias]
+	st = status
+	ci = commit
+	br = branch
+	co = checkout
+[merge]
+	tool = vimdiff

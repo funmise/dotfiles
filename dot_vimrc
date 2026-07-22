@@ -1,0 +1,42 @@
+" ============================
+" Vertical Ruler & Wrap Text Config
+" ============================
+" --- Default color column for most files ---
+set colorcolumn=80
+
+" --- Style for the color column (gray background) ---
+highlight ColorColumn ctermbg=darkgray guibg=#2c2c2c
+
+" --- Ensure Vim detects file types ---
+filetype plugin indent on
+
+" --- Dynamically set color columns for specific file types ---
+augroup dynamic_colorcolumn
+  autocmd!
+  " For Git commit messages: rulers at 50(subject) and 72(body), wrap text at 72
+  autocmd FileType gitcommit setlocal colorcolumn=50,72,80 textwidth=72 formatoptions+=t
+augroup END
+
+" ===============================
+" Line Number Configuration
+" ===============================
+
+" Show absolute line numbers
+set number
+
+" (Optional) also show relative numbers for easier navigation
+" set relativenumber
+
+" (Optional) keep the current line absolute while others are relative
+" This already happens when both 'number' and 'relativenumber' are on
+
+" ============================
+" Search Highlight Configuration
+" ============================
+
+" Keep all search matches highlighted
+set hlsearch
+
+" Highlight the current search match in orange
+highlight CurSearch cterm=bold ctermfg=black ctermbg=208
+      \ gui=bold guifg=black guibg=#ff8700

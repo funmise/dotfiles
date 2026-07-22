@@ -1,0 +1,156 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# ---- PATH handling (dedupe + stable order) ----
+# In zsh, PATH is mirrored by the array "path".
+# -U makes entries unique automatically (no duplicates even if I source repeatedly).
+typeset -U path PATH
+
+# Add Flutter SDK first
+path=(/Applications/flutter/bin $path)
+
+# Dart/Flutter pub global executables
+path=($HOME/.pub-cache/bin $path)
+
+# ---- Terminal quality-of-life ----
+# Disable XON/XOFF flow control so Ctrl-S works (forward search) instead of freezing the terminal
+[[ -t 0 ]] && stty -ixon
+
+# ---- Node (nvm) ----
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # loads nvm_bash completion
+
+# ---- Java ----
+export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+path=($JAVA_HOME/bin $path)
+
+# ---- zsh help that feels like bash help ----
+# Use Zsh's internal run-help
+alias run-help >/dev/null 2>&1 && unalias run-help
+autoload -Uz run-help
+
+# Set the correct help directory for system zsh 5.9
+HELPDIR=/usr/share/zsh/5.9/help
+
+# Make "help" behave like run-help
+alias help=run-help
+
+# Created by `pipx` on 2025-12-29 09:58:34
+path=($path $HOME/.local/bin)
+
+# ---- History behavior ----
+setopt HIST_IGNORE_SPACE
+
+# ---- Extra Zsh completion definitions ----                                    
+fpath=("$(brew --prefix)/share/zsh-completions" $fpath)                         
+                                                                                
+# Initialize Zsh completion                                                     
+autoload -Uz compinit                                                           
+compinit 
+
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+
+# ---- zsh autosuggestions ----
+# Shows grey inline suggestions based mainly on shell history.
+if [[ -f "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+  source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+fi
+
+# ---- History substring search ----
+# Type part of an old command, then use Up/Down to cycle through matching history.
+source "$(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
+
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+# ---- zoxide (smart cd) ----
+if command -v zoxide >/dev/null; then
+  eval "$(zoxide init zsh)"
+fi
+
+# ---- bash like bindings ---- 
+bindkey '^U' backward-kill-line
+
+##### Using powerlevel10k now so obsolete ####
+# # ---- shell prompt ----
+# PROMPT='%(?.%F{10}⏺.%F{9}⏺)%f %2~ %# '
+# 
+# # ---- display version control info ---- 
+# # Autoload zsh's `add-zsh-hook` and `vcs_info` functions
+# # (-U autoload w/o substition, -z use zsh style)
+# autoload -Uz add-zsh-hook vcs_info
+# 
+# # Set prompt substitution so we can use the vcs_info_message variable
+# setopt prompt_subst
+# 
+# # Run the `vcs_info` hook to grab git info before displaying the prompt
+# add-zsh-hook precmd vcs_info
+# 
+# # Style the vcs_info message
+# zstyle ':vcs_info:*' enable git
+# zstyle ':vcs_info:git*' formats '%b%u%c'
+# # Format when the repo is in an action (merge, rebase, etc)
+# zstyle ':vcs_info:git*' actionformats '%F{14}⏱ %*%f'
+# zstyle ':vcs_info:git*' unstagedstr '*'
+# zstyle ':vcs_info:git*' stagedstr '+'
+# # This enables %u and %c (unstaged/staged changes) to work,
+# # but can be slow on large repos
+# zstyle ':vcs_info:*:*' check-for-changes true
+# 
+# # Manual untracked file tracking since vcs_info ignores untracked files
+# git_untracked() {
+#   git rev-parse --is-inside-work-tree &>/dev/null || return
+#   git status --porcelain 2>/dev/null | grep -q '^?? ' && echo '?'
+# }
+# 
+# # Set the right prompt to the vcs_info message
+# RPROMPT='${vcs_info_msg_0_:+⎇ ${vcs_info_msg_0_}$(git_untracked)}'
+
+# Set up shell wrapper that provides the ability to change the current working 
+# directory when exiting Yazi.
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+	command rm -f -- "$tmp"
+}
+
+# shorten eza
+alias ez='eza'
+
+# Make ls always show color
+alias ls='ls --color=auto'
+
+# --- Setup powerlevel10k --- #
+source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Better grep highlighting: black text on light-yellow background
+export GREP_COLOR='30;103'
+alias grep='grep --color=auto'
+
+# less search highlighting: black text on light-yellow background
+export LESS_TERMCAP_so=$'\e[30;103m'
+export LESS_TERMCAP_se=$'\e[0m'
+
+# shorten common git commands
+alias gts='git status'
+alias gtc='git commit'
+alias gtb='git branch'
+alias gtk='git checkout'
+
+
+# ---- zsh syntax highlighting ----
+# Colors commands/arguments as you type. Keep this near the end of ~/.zshrc.
+if [[ -f "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+  source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
