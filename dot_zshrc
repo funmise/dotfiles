@@ -77,41 +77,6 @@ fi
 # ---- bash like bindings ---- 
 bindkey '^U' backward-kill-line
 
-##### Using powerlevel10k now so obsolete ####
-# # ---- shell prompt ----
-# PROMPT='%(?.%F{10}⏺.%F{9}⏺)%f %2~ %# '
-# 
-# # ---- display version control info ---- 
-# # Autoload zsh's `add-zsh-hook` and `vcs_info` functions
-# # (-U autoload w/o substition, -z use zsh style)
-# autoload -Uz add-zsh-hook vcs_info
-# 
-# # Set prompt substitution so we can use the vcs_info_message variable
-# setopt prompt_subst
-# 
-# # Run the `vcs_info` hook to grab git info before displaying the prompt
-# add-zsh-hook precmd vcs_info
-# 
-# # Style the vcs_info message
-# zstyle ':vcs_info:*' enable git
-# zstyle ':vcs_info:git*' formats '%b%u%c'
-# # Format when the repo is in an action (merge, rebase, etc)
-# zstyle ':vcs_info:git*' actionformats '%F{14}⏱ %*%f'
-# zstyle ':vcs_info:git*' unstagedstr '*'
-# zstyle ':vcs_info:git*' stagedstr '+'
-# # This enables %u and %c (unstaged/staged changes) to work,
-# # but can be slow on large repos
-# zstyle ':vcs_info:*:*' check-for-changes true
-# 
-# # Manual untracked file tracking since vcs_info ignores untracked files
-# git_untracked() {
-#   git rev-parse --is-inside-work-tree &>/dev/null || return
-#   git status --porcelain 2>/dev/null | grep -q '^?? ' && echo '?'
-# }
-# 
-# # Set the right prompt to the vcs_info message
-# RPROMPT='${vcs_info_msg_0_:+⎇ ${vcs_info_msg_0_}$(git_untracked)}'
-
 # Set up shell wrapper that provides the ability to change the current working 
 # directory when exiting Yazi.
 function y() {
