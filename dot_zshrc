@@ -113,9 +113,15 @@ alias gtc='git commit'
 alias gtb='git branch'
 alias gtk='git checkout'
 
+# iterm2 shell integration
+if [[ -f "$HOME/.iterm2_shell_integration.zsh" ]]; then
+    source "$HOME/.iterm2_shell_integration.zsh"
+fi
+
 
 # ---- zsh syntax highlighting ----
 # Colors commands/arguments as you type. Keep this near the end of ~/.zshrc.
 if [[ -f "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
   source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 fi
+
