@@ -1,3 +1,10 @@
+" =============================
+" Leader Key Configuration
+" =============================
+
+" Use Space as the leader key
+let mapleader = " "
+
 " ============================
 " Vertical Ruler & Wrap Text Config
 " ============================
@@ -30,6 +37,14 @@ set number
 " (Optional) keep the current line absolute while others are relative
 " This already happens when both 'number' and 'relativenumber' are on
 
+" =============================
+" Mouse Configuration
+" =============================
+
+" Let Vim handle mouse/trackpad input in all modes
+" Needed for proper mouse scrolling, especially when running inside tmux
+set mouse=a
+
 " ============================
 " Search Highlight Configuration
 " ============================
@@ -40,3 +55,7 @@ set hlsearch
 " Highlight the current search match in orange
 highlight CurSearch cterm=bold ctermfg=black ctermbg=208
       \ gui=bold guifg=black guibg=#ff8700
+
+" Temporarily clear search highlighting with Space + h
+" The search itself is still remembered; n/N or a new search brings highlighting back
+nnoremap <leader>h :nohlsearch<CR>
