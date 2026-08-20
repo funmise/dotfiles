@@ -45,6 +45,13 @@ set number
 " Needed for proper mouse scrolling, especially when running inside tmux
 set mouse=a
 
+" Use the macOS/Linux system clipboard for normal yank/delete/put operations
+if has("mac")
+    set clipboard=unnamed
+else
+    set clipboard=unnamedplus
+endif
+
 " ============================
 " Search Highlight Configuration
 " ============================
