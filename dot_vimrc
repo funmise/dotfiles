@@ -25,7 +25,7 @@ augroup dynamic_colorcolumn
 augroup END
 
 " ===============================
-" Line Number Configuration
+" Line Number & Syntax Configuration
 " ===============================
 
 " Show absolute line numbers
@@ -36,6 +36,9 @@ set number
 
 " (Optional) keep the current line absolute while others are relative
 " This already happens when both 'number' and 'relativenumber' are on
+
+" Enable syntax highlighting
+syntax on
 
 " =============================
 " Mouse Configuration
