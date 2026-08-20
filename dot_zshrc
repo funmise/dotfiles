@@ -93,6 +93,9 @@ alias ez='eza'
 # Make ls always show color
 alias ls='ls --color=auto'
 
+# fzf options
+export FZF_DEFAULT_OPTS="--layout=reverse"
+
 # --- Setup powerlevel10k --- #
 source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 
@@ -106,12 +109,6 @@ alias grep='grep --color=auto'
 # less search highlighting: black text on light-yellow background
 export LESS_TERMCAP_so=$'\e[30;103m'
 export LESS_TERMCAP_se=$'\e[0m'
-
-# shorten common git commands
-alias gts='git status'
-alias gtc='git commit'
-alias gtb='git branch'
-alias gtk='git checkout'
 
 # iterm2 shell integration
 if [[ -f "$HOME/.iterm2_shell_integration.zsh" ]]; then
