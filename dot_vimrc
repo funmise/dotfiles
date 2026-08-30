@@ -80,3 +80,21 @@ highlight CurSearch cterm=bold ctermfg=black ctermbg=208
 " Temporarily clear search highlighting with Space + h
 " The search itself is still remembered; n/N or a new search brings highlighting back
 nnoremap <leader>h :nohlsearch<CR>
+
+" =============================
+" Plugin Configuration
+" =============================
+call plug#begin()
+
+Plug 'itchyny/lightline.vim'
+
+call plug#end()
+
+" Always show status line
+set laststatus=2
+
+" Lightline appearance
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ }
+
