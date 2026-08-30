@@ -25,20 +25,31 @@ augroup dynamic_colorcolumn
 augroup END
 
 " ===============================
-" Line Number & Syntax Configuration
+" Line & Syntax Configuration
 " ===============================
 
 " Show absolute line numbers
 set number
 
-" (Optional) also show relative numbers for easier navigation
-" set relativenumber
+" Show relative numbers for easier navigation
+set relativenumber
 
 " (Optional) keep the current line absolute while others are relative
 " This already happens when both 'number' and 'relativenumber' are on
 
 " Enable syntax highlighting
 syntax on
+
+" Show as much of the last visible line as possible instead of @ placeholders
+set display+=lastline
+
+" Tab and indentation settings
+" tabstop=4     -> display a tab as 4 columns wide
+" shiftwidth=4  -> indentation commands like >> use 4 spaces
+" expandtab     -> pressing Tab inserts spaces instead of a literal tab
+set tabstop=4
+set shiftwidth=4
+set expandtab
 
 " =============================
 " Mouse Configuration
