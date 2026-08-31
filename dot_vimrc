@@ -52,7 +52,7 @@ set shiftwidth=4
 set expandtab
 
 " =============================
-" Mouse Configuration
+" Mouse & Key Configuration
 " =============================
 
 " Let Vim handle mouse/trackpad input in all modes
@@ -66,8 +66,11 @@ else
     set clipboard=unnamedplus
 endif
 
+" Disable Q in Normal mode because it enters Ex mode
+nnoremap Q <Nop>
+
 " ============================
-" Search Highlight Configuration
+" Search Configuration
 " ============================
 
 " Keep all search matches highlighted
@@ -80,6 +83,15 @@ highlight CurSearch cterm=bold ctermfg=black ctermbg=208
 " Temporarily clear search highlighting with Space + h
 " The search itself is still remembered; n/N or a new search brings highlighting back
 nnoremap <leader>h :nohlsearch<CR>
+
+" This setting makes search case-insensitive when all characters in the string
+" being searched are lowercase. However, the search becomes case-sensitive if
+" it contains any capital letters. This makes searching more convenient.
+set ignorecase
+set smartcase
+
+" Enable searching as you type, rather than waiting till you press enter.
+set incsearch
 
 " =============================
 " Plugin Configuration
