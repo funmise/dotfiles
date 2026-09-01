@@ -52,6 +52,19 @@ set shiftwidth=4
 set expandtab
 
 " =============================
+" Window & Split Configuration
+" =============================
+
+" Always show the status line
+set laststatus=2
+
+" Open new vertical splits to the right
+set splitright
+
+" Open new horizontal splits below
+set splitbelow
+
+" =============================
 " Mouse & Key Configuration
 " =============================
 
@@ -68,6 +81,12 @@ endif
 
 " Disable Q in Normal mode because it enters Ex mode
 nnoremap Q <Nop>
+
+" Fuzzy-find file with Ctrl + p
+nnoremap <C-p> :Files<CR>
+
+" Toggle NERDTree with Space + n
+nnoremap <leader>n :NERDTreeToggle<CR>
 
 " ============================
 " Search Configuration
@@ -99,11 +118,12 @@ set incsearch
 call plug#begin()
 
 Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'preservim/nerdtree'
+Plug 'easymotion/vim-easymotion'
 
 call plug#end()
-
-" Always show status line
-set laststatus=2
 
 " Lightline appearance
 let g:lightline = {
