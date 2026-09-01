@@ -137,6 +137,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'preservim/nerdtree'
 Plug 'joshdick/onedark.vim'
 Plug 'tomasr/molokai'
+Plug 'vim-python/python-syntax'
 Plug 'easymotion/vim-easymotion'
 
 call plug#end()
@@ -148,3 +149,7 @@ let g:lightline = {
 
 " Use Molokai as the main Vim colorscheme
 colorscheme molokai
+
+" Enable richer Python syntax highlighting
+let python_highlight_all = 1
+
