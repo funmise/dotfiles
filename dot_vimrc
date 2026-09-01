@@ -113,6 +113,20 @@ set smartcase
 set incsearch
 
 " =============================
+" Appearance Configuration
+" =============================
+
+" Use true colors in the terminal
+set termguicolors
+
+" Use a dark background
+set background=dark
+
+" Highlight the current line and line number
+set cursorline
+set cursorlineopt=both
+
+" =============================
 " Plugin Configuration
 " =============================
 call plug#begin()
@@ -121,12 +135,16 @@ Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'preservim/nerdtree'
+Plug 'joshdick/onedark.vim'
+Plug 'tomasr/molokai'
 Plug 'easymotion/vim-easymotion'
 
 call plug#end()
 
 " Lightline appearance
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'one',
       \ }
 
+" Use Molokai as the main Vim colorscheme
+colorscheme molokai
